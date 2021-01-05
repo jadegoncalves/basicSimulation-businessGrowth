@@ -130,9 +130,7 @@ class Funcionario:
         else:
             aumenta = 0
 
-        temp = self.modificaSatisfacao(aumenta)
-        print(temp)
-        return temp
+        return self.modificaSatisfacao(aumenta)
 
     def __str__(self):
         return ("Salário: " + str(self.salario) +

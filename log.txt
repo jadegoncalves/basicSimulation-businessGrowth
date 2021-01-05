@@ -1,17 +1,17 @@
 Crescimento de: 1560000000.00%
-Crescimento de: 58.31%
-Crescimento de: 35.96%
-Crescimento de: 39.31%
-Crescimento de: 33.35%
-Crescimento de: 102.89%
-Crescimento de: 57.09%
-Crescimento de: 25.35%
-Crescimento de: 19.93%
-Crescimento de: 12.93%
+Crescimento de: 100.00%
+Crescimento de: 47.69%
+Crescimento de: 27.08%
+Crescimento de: 25.41%
+Crescimento de: 20.26%
+Crescimento de: 14.13%
+Crescimento de: 13.69%
+Crescimento de: 12.04%
+Crescimento de: 8.88%
 Resultado Empresa:
-Carteira total: 3374874.70
+Carteira total: 1398000.01
 Investimento total: 10000.00
-Produtividade: 58.32%
+Produtividade: 90.00%
 Quantidade Funcionários: 5
-Media Satisfação dos funcionarios: 38.12
-Último Crescimento: 12.93%
+Media Satisfação dos funcionarios: 59.53
+Último Crescimento: 8.88%
