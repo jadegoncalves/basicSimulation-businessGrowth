@@ -1,24 +1,17 @@
 # simulacao-empresa
  Simulação basica de crescimento de empresa 
 
-# Dados para simulação
+# dados
 
 margem de contribuição = ganho - custo fixo - custo variavel
-
 lucro = margem de contribuição - investimento
 
 Empresa:
-
 investimento inicial: (>R$10000)
-
 salario inicial: (R$1000 - R$2000)
-
 custo fixo: (>R$2000)
-
 custo unitário: (>R$100)
-
 demanda: (100 p/ mes)
-
 margem = (>100%)
 
 produtividade total: multiplicação das produtividades dos funcionários diretos
