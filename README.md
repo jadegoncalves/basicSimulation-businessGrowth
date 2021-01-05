@@ -1,41 +1,33 @@
 # simulacao-empresa
  Simulação basica de crescimento de empresa 
 
-# dados
-
-margem de contribuição = ganho - custo fixo - custo variavel
-lucro = margem de contribuição - investimento
+# dados <br/>
+margem de contribuição = ganho - custo fixo - custo variavel <br/>
+lucro = margem de contribuição - investimento <br/>
 
 Empresa:
-investimento inicial: (>R$10000)
-salario inicial: (R$1000 - R$2000)
-custo fixo: (>R$2000)
-custo unitário: (>R$100)
-demanda: (100 p/ mes)
-margem = (>100%)
+investimento inicial: (>R$10000)<br/>
+salario inicial: (R$1000 - R$2000)<br/>
+custo fixo: (>R$2000)<br/>
+custo unitário: (>R$100)<br/>
+demanda: (100 p/ mes)<br/>
+margem = (>100%)<br/>
 
-produtividade total: multiplicação das produtividades dos funcionários diretos
+produtividade total: multiplicação das produtividades dos funcionários diretos<br/>
+produção: demanda * produtividade<br/>
+custo variável: custo unitário * producao<br/>
+preço = (custo fixo + custo variavel) * margem<br/>
+ganho = preço * producao <br/>
 
-produção: demanda * produtividade
-
-custo variável: custo unitário * producao
-
-preço = (custo fixo + custo variavel) * margem
-
-ganho = preço * producao 
-
-Funcionarios: 
+#### funcionarios: 
 
 salário: (começa com salario incial)
 
 idade: incrementa todo ano
 
 	- > 25 aumento de 25%
-	
 	- > 30 aumento de 30%
-	
 	- > 40 aumento de 40%
-	
 	- > 50 aposenta
 	
 satisfação: (começa com 50)
@@ -47,16 +39,10 @@ produtividade: (começa com 100)
 diretos: 
 
 	- podem ser reduzidos a partir do investimento
-	
 	- satisfação baixa: < produtividade
 
 indiretos:
 
 	- recebem promoção
-	
 	- satisfação = 0: sai da empresa
-
-
-
-
-
+	
