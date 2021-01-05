@@ -1,44 +1,48 @@
 # simulacao-empresa
  Simulação basica de crescimento de empresa 
 
-# Dados para simulação
+## Dados <br/>
+### Empresa:
 
-margem de contribuição = ganho - custo fixo - custo variavel
-lucro = margem de contribuição - investimento
+**margem de contribuição** = ganho - custo fixo - custo variavel <br/>
+**lucro** = margem de contribuição - investimento <br/>
+**investimento inicial**: (>R$10000)<br/>
+**salário inicial**: (R$1000 - R$2000)<br/>
+**custo fixo**: (>R$2000)<br/>
+**custo unitário**: (>R$100)<br/>
+**demanda**: (100 p/ mes)<br/>
+**margem** = (>100%)<br/>
 
-Empresa:
-investimento inicial: ? (>R$10000)
-salario inicial: ? (R$1000 - R$2000)
-custo fixo: ? (>R$2000)
-custo unitário: ? (>R$100)
-demanda: ? (100 p/ mes)
-margem = ? (>100%)
+**produtividade total**: multiplicação das produtividades dos funcionários diretos<br/>
+**produção**: demanda * produtividade<br/>
+**custo variável**: custo unitário * producao<br/>
+**preço** = (custo fixo + custo variavel) * margem<br/>
+**ganho** = preço * producao <br/>
 
-produtividade total: multiplicação das produtividades dos funcionários diretos
-produção: demanda * produtividade
-custo variável: custo unitário * producao
-preço = (custo fixo + custo variavel) * margem
-ganho = preço * producao 
+### Funcionários: 
 
-Funcionarios: 
-salário: (começa com salario incial)
-idade: ? incrementa todo ano
+**salário:** (começa com salario incial)<br/>
+**idade:** incrementa todo ano
+
 	- > 25 aumento de 25%
 	- > 30 aumento de 30%
 	- > 40 aumento de 40%
 	- > 50 aposenta
-satisfação: ? (começa com 50)
+	
+**satisfação:** (começa com 50)
+
 	- aumenta ou diminui aleatoriamente cada ano
-produtividade: ? (começa com 100)
-diretos: 
+	
+**produtividade:** (começa com 100)<br/>
+**diretos:** 
+
 	- podem ser reduzidos a partir do investimento
 	- satisfação baixa: < produtividade
 
-indiretos: 
+**indiretos:**
+
 	- recebem promoção
 	- satisfação = 0: sai da empresa
-
-
-
-
-
+	
+### Bibliografia
+https://towardsdatascience.com/12-data-science-projects-for-12-days-of-christmas-aff693f5ed2b
