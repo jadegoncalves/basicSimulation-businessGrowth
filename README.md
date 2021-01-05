@@ -46,5 +46,3 @@
 	
 ### Bibliografia
 https://towardsdatascience.com/12-data-science-projects-for-12-days-of-christmas-aff693f5ed2b
-random
-matplotlib
