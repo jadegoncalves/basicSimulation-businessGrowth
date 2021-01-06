@@ -10,14 +10,15 @@ sub_custo_fixo = 2000.00            # custo fixo de luz, água, condomínio
 custo_unitario = 100.00             # quanto custa produzir UM produto
 demanda = 100                       # quantas peças eu tenho que produzir mensalmente
 margem = 200                        # quantos % do custo para preço de venda
-carteira_total = 0.01               # com quantos reais a empresa irá começar
-probabilidade_satisfacao = 70       # probabilidade de satisfação dos funcionários em relação a empresa
+carteira_inicial = 0.01               # com quantos reais a empresa irá começar
+probabilidade_satisfacao = 60       # probabilidade de satisfação dos funcionários em relação a empresa
 
 class Empresa:
 
     def __init__(self):
-        self.carteiraTotal = carteira_total
+        self.carteira = carteira_inicial
         self.investimento = investimento_inicial
+        self.carteiraTotal = self.carteira + self.investimento
         self.dicionarioFuncionarios = []
 
     def contrataFuncionario(self):
@@ -54,15 +55,15 @@ class Empresa:
             self.investimento = self.investimento + margem_de_contribuicao
             margem_de_contribuicao = 0
         lucro = margem_de_contribuicao * (1 - (porcento_investimento/100))
-        self.carteiraTotal = self.carteiraTotal + lucro
-        self.investimento = self.investimento + \
-            (margem_de_contribuicao - lucro)
+        self.carteira = self.carteira + lucro
+        self.investimento = self.investimento + (margem_de_contribuicao - lucro)
+        self.carteiraTotal = self.carteira + self.investimento
 
     def demiteFuncionario(self, funcionario):
         self.dicionarioFuncionarios.remove(funcionario)
 
     def reset(self):
-        self.carteiraTotal = 0.01
+        self.carteira = 0.01
         self.investimento = investimento_inicial
 
     def __str__(self):
@@ -124,6 +125,7 @@ class Funcionario:
         if(self.tipo == "Indireto"):
             self.aumentaSalario()
 
+    def updateMensal(self):
         rand = random.randint(0, 100)
         if (rand >= (100 - probabilidade_satisfacao)):
             aumenta = 1
@@ -144,7 +146,7 @@ def update():
 
     meses = [0]
     #simulaEmpresa.reset()
-    receitas = [simulaEmpresa.carteiraTotal]
+    receitas = [simulaEmpresa.carteira]
 
     for mes in range(1, 13):
         simulaEmpresa.calculaGastos()
@@ -152,20 +154,23 @@ def update():
         simulaEmpresa.realizaPagamento()
         meses.append(mes)
         receitas.append(simulaEmpresa.carteiraTotal)
+        updateFuncionarios("mensal")
         #print("MES: " + str(mes))
         #print(simulaEmpresa)
 
     return meses, receitas
 
 
-def updateFuncionarios():
+def updateFuncionarios(time = "mensal"):
 
     for funcionario in simulaEmpresa.dicionarioFuncionarios:
-        feedback = funcionario.updateAnual()
-        #print(funcionario)
-        if(feedback <= 0):
-            simulaEmpresa.demiteFuncionario(funcionario)
+        if (time == "anual"):
+            funcionario.updateAnual()
 
+        else:
+            feedback = funcionario.updateMensal()
+            if(feedback <= 0):
+                simulaEmpresa.demiteFuncionario(funcionario)
 
 def updateGrafico(val):
     global custo_unitario, margem, demanda
@@ -192,9 +197,11 @@ if __name__ == "__main__":
         meses, receitas = update()
 
         fig, ax = plt.subplots()
-        plt.subplots_adjust(bottom=0.3)
+        plt.subplots_adjust(left=0.2, bottom=0.35)
         graph, = plt.plot(meses, receitas)
         plt.title("ANO 202" + str(ano))
+        plt.xlabel('time (m)')
+        plt.ylabel('revenue (R$)')
 
         axcolor = 'lightgoldenrodyellow'
         axcusto = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor=axcolor)
@@ -213,7 +220,7 @@ if __name__ == "__main__":
         crescimento = "%.2f" % (((final - inicial)/inicial) *100)
         print("Crescimento de: " + crescimento + "%")
         escreverLog = escreverLog + "Crescimento de: " + crescimento + "%\r\n"
-        updateFuncionarios()
+        updateFuncionarios("anual")
         
         plt.show()  # melhorar visualização do grafico
     
