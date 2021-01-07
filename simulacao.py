@@ -1,7 +1,7 @@
 import random
-import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider
 import os
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 investimento_inicial = 10000.00     # qual investimento inicial na empresa
 porcento_investimento = 0           # quanto da margem vai investir (porcentagem)
@@ -20,6 +20,9 @@ class Empresa:
         self.investimento = investimento_inicial
         self.carteiraTotal = self.carteira + self.investimento
         self.dicionarioFuncionarios = []
+        self.receitas = []
+        self.periodo = []
+        self.mes = 1 # TEMPORARIO RETIRAR
 
     def contrataFuncionario(self):
         quantidade = 5  
@@ -58,6 +61,27 @@ class Empresa:
         self.carteira = self.carteira + lucro
         self.investimento = self.investimento + (margem_de_contribuicao - lucro)
         self.carteiraTotal = self.carteira + self.investimento
+
+    def updateAnual(self):
+
+        for mes in range(1, 13):
+            self.calculaGastos()
+            self.calculaGanho()
+            self.realizaPagamento()
+            self.periodo.append(self.mes)
+            self.receitas.append(self.carteiraTotal)
+            self.updateFuncionarios("mensal")
+            self.mes += 1
+    
+    def updateFuncionarios(self, time = "mensal"):
+
+        for funcionario in self.dicionarioFuncionarios:
+            if (time == "anual"):
+                funcionario.updateAnual()
+            else:
+                feedback = funcionario.updateMensal()
+                if(feedback <= 0):
+                    self.demiteFuncionario(funcionario)
 
     def demiteFuncionario(self, funcionario):
         self.dicionarioFuncionarios.remove(funcionario)
@@ -141,47 +165,40 @@ class Funcionario:
         "\r\nSatisfação: " + str(self.satisfacao) +
         "\r\nTipo: " + self.tipo) 
 
+class Grafico:
 
-def update():
+    def __init__(self, objeto):
+        self.xData = []
+        self.yData = []
+        self.dados = objeto
 
-    meses = [0]
-    #simulaEmpresa.reset()
-    receitas = [simulaEmpresa.carteira]
+    def animate(self,i):
 
-    for mes in range(1, 13):
-        simulaEmpresa.calculaGastos()
-        simulaEmpresa.calculaGanho()
-        simulaEmpresa.realizaPagamento()
-        meses.append(mes)
-        receitas.append(simulaEmpresa.carteiraTotal)
-        updateFuncionarios("mensal")
-        #print("MES: " + str(mes))
-        #print(simulaEmpresa)
+        self.yData.append(self.dados.receitas[i])
+        self.xData.append(self.dados.periodo[i])
 
-    return meses, receitas
+        self.graph.set_data(self.xData, self.yData)
 
+        return self.graph,
 
-def updateFuncionarios(time = "mensal"):
+    def desenha_grafico(self):
 
-    for funcionario in simulaEmpresa.dicionarioFuncionarios:
-        if (time == "anual"):
-            funcionario.updateAnual()
+        fig, ax = plt.subplots()
+        plt.subplots_adjust(left=0.2, bottom=0.35)
 
-        else:
-            feedback = funcionario.updateMensal()
-            if(feedback <= 0):
-                simulaEmpresa.demiteFuncionario(funcionario)
+        self.graph, = ax.plot([], [])
+        
+        plt.title("Simple Business Case Simulator")
+        plt.xlabel('time (m)')
+        plt.ylabel('revenue (R$)')
 
-def updateGrafico(val):
-    global custo_unitario, margem, demanda
-    custo_unitario = scusto.val
-    margem = smargem.val
-    demanda = sdemanda.val
-    # melhorar update do gráfico
-    #meses, receitas = update()
-    #graph.set_ydata(receitas)
-    #fig.canvas.draw_idle()
+        ax.set_xlim(0, (len(self.dados.periodo) - 1))
+        ax.set_ylim(min(self.dados.receitas), max(self.dados.receitas))
 
+        ani = animation.FuncAnimation(fig, self.animate,
+        interval=40, blit=True, repeat= False, frames=(len(self.dados.receitas)-1))
+
+        plt.show()  # melhorar visualização do grafico
 
 if __name__ == "__main__":
 
@@ -194,39 +211,21 @@ if __name__ == "__main__":
 
         print("ANO " + str(ano))
         inicial = simulaEmpresa.carteiraTotal
-        meses, receitas = update()
 
-        fig, ax = plt.subplots()
-        plt.subplots_adjust(left=0.2, bottom=0.35)
-        graph, = plt.plot(meses, receitas)
-        plt.title("ANO 202" + str(ano))
-        plt.xlabel('time (m)')
-        plt.ylabel('revenue (R$)')
-
-        axcolor = 'lightgoldenrodyellow'
-        axcusto = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor=axcolor)
-        axmargem = plt.axes([0.25, 0.15, 0.65, 0.03], facecolor=axcolor)
-        axdemanda = plt.axes([0.25, 0.20, 0.65, 0.03], facecolor=axcolor)
-
-        scusto = Slider(axcusto, 'Custo', 1, 200, valinit=custo_unitario)
-        smargem = Slider(axmargem, 'Margem', 100, 500, valinit=margem, valstep=5)
-        sdemanda = Slider(axdemanda, 'Demanda', 10, 1000, valinit=demanda)
-
-        scusto.on_changed(updateGrafico)
-        smargem.on_changed(updateGrafico)
-        sdemanda.on_changed(updateGrafico)
+        simulaEmpresa.updateAnual()
+        simulaEmpresa.updateFuncionarios("anual")
 
         final = simulaEmpresa.carteiraTotal
         crescimento = "%.2f" % (((final - inicial)/inicial) *100)
         print("Crescimento de: " + crescimento + "%")
-        escreverLog = escreverLog + "Crescimento de: " + crescimento + "%\r\n"
-        updateFuncionarios("anual")
-        
-        plt.show()  # melhorar visualização do grafico
+        escreverLog = escreverLog + "Crescimento de: " + crescimento + "%\r\n"        
     
     print("Resultado Empresa:")
     print(simulaEmpresa)
     print("Último Crescimento: " + crescimento + "%")
+
+    graph = Grafico(simulaEmpresa)
+    graph.desenha_grafico()
 
     escreverLog = escreverLog + "Resultado Empresa:\r\n"
     escreverLog = escreverLog + str(simulaEmpresa)
