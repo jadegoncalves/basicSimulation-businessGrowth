@@ -1,17 +1,27 @@
-Crescimento de: 520.09%
-Crescimento de: 135.32%
-Crescimento de: 54.18%
-Crescimento de: 47.78%
-Crescimento de: 34.04%
-Crescimento de: 14.53%
-Crescimento de: 15.28%
-Crescimento de: 11.15%
-Crescimento de: 1.35%
-Crescimento de: 11.89%
+Crescimento de: 6334.74%
+Crescimento de: 80.54%
+Crescimento de: 53.63%
+Crescimento de: 27.14%
+Crescimento de: 22.46%
+Crescimento de: 27.76%
+Crescimento de: 24.30%
+Crescimento de: 21.48%
+Crescimento de: -0.47%
+Crescimento de: 16.19%
+Crescimento de: 27.25%
+Crescimento de: 21.86%
+Crescimento de: 13.13%
+Crescimento de: 5.90%
+Crescimento de: 5.43%
+Crescimento de: 7.10%
+Crescimento de: 4.81%
+Crescimento de: -0.29%
+Crescimento de: -3.12%
+Crescimento de: -2.27%
 Resultado Empresa:
-Carteira total: 741547.21
-Investimento total: -2400.00
-Produtividade: 90.00%
-Quantidade Funcionários: 4
-Media Satisfação dos funcionarios: 12666.50
-Último Crescimento: 11.89%
+Carteira total: 12867896.98
+Investimento total: 2995044.95
+Produtividade: 3.77%
+Quantidade Funcionários: 51
+Media Satisfação dos funcionarios: 62.04
+Último Crescimento: -2.27%
